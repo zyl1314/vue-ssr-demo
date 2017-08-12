@@ -25,7 +25,7 @@ vue@2.2.2 + vue-router@2.2.0 + vuex@2.2.1 + vue-server-renderer@2.2.2
 ## 什么是服务端渲染，为什么需要服务端渲染  
 
 先不回答问题，我们先来看一下常规的vue项目在浏览器是如何加载的：
-![image](https://github.com/zyl1314/vue-ssr/blob/master/img/1.png)
+![image](https://github.com/zyl1314/vue-ssr/blob/master/img/1.PNG)
 上图是一个vue的spa项目，服务器返回来的东西很简单（标红线部分），仅仅一个根容器和一个js标签，但是我们在浏览器上看到的并不是空页面啊，这我们都知道是通过加载的js文件动态渲染出来的。
 但是这样做有两个最大的问题：
 - 1.无法SEO
@@ -392,7 +392,7 @@ app.get('*', (req, res) => {
 app.listen(8080)
 ```
 注意最后要将客户端文件引入  
-![image](https://github.com/zyl1314/vue-ssr/blob/master/img/2.png)
+![image](https://github.com/zyl1314/vue-ssr/blob/master/img/2.PNG)
 可以看到，这时候已经返回的内容已经在服务端渲染过了
 
 
@@ -552,7 +552,7 @@ Vue.mixin({
   }
 })
 ```
-![image](https://github.com/zyl1314/vue-ssr/blob/master/img/3.png)
+![image](https://github.com/zyl1314/vue-ssr/blob/master/img/3.PNG)
 可以看到，数据已经被取到并且渲染出来了。  
 
 至此，全文完。
