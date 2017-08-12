@@ -8,27 +8,29 @@ const app = express()
 const createApp = require('./dist/bundle.server.js')['default']
 
 // Client-Side Bundle File
-const clientBundleFilePath = path.join(__dirname, './dist/bundle.client.js')
 const clientBundleFileUrl = '/bundle.client.js'
+app.use('/', express.static(__dirname + '/dist'))
 
-// Client-Side Bundle File
-app.get(clientBundleFileUrl, (req, res) => {
-  const clientBundleFileCode = fs.readFileSync(clientBundleFilePath, 'utf8')
-  res.send(clientBundleFileCode)
+// api
+app.get('/api/getList', (req, res) => {
+    res.json(
+        {
+            list: [
+                {'title': 11},
+                {'title': 22},
+                {'title': 33},
+                {'title': 44}
+            ]
+        }
+    )
 })
 
 // Server-Side Rendering
 app.get('*', (req, res) => {
 
   const context = { url: req.url }
-
-  const app = createApp(context)
   
-  if (app.code && app.code == 404) {
-	  res.status(404).end('Page not found')
-	  return 
-  }
-
+  createApp(context).then(app => {
     renderer.renderToString(app, (err, html) => {
         if (err){
         res.status(500).send(`
@@ -52,12 +54,16 @@ app.get('*', (req, res) => {
             </body>
             </html>`)
         }
-    })
+    });
+  }, err => {
+    if (err.code === 404) {
+        res.status(404).end('Page not found')
+    } else {
+        res.status(500).end('Internal Error')
+    }
+  })
 
 })
 
 // Start server
-const PORT = 8000
-app.listen(PORT, function () {
-  console.log(`Example app listening on port ${PORT}!`)
-})
+app.listen(8080)

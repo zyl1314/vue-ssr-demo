@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-client": "webpack --config ./webpack/webpack.client.js",
+    "build-server": "webpack --config ./webpack/webpack.server.js",
+    "server": "node server"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +27,6 @@
     "style-loader": "^0.18.2",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.4",
-    "webpack": "^2.1.0-beta.25"
+    "webpack": "^2.3.1"
   }
 }
